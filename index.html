@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Recollection Archive</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap');
+:root{color-scheme:dark;--gold:#c7a66b;--paper:#e9dfc8;--muted:#aa9e8b}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 15%,#34342d 0%,#171c1d 48%,#101415 100%);color:var(--paper);font-family:'DM Sans',sans-serif;display:grid;place-items:center;padding:35px 18px}body:before{content:'';position:fixed;inset:0;opacity:.11;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}main{width:min(100%,600px);border:1px solid #7d6847;padding:9px;background:#1d2424;box-shadow:0 24px 90px #0008}.inner{border:1px solid #514b3d;min-height:660px;padding:48px 38px 36px;text-align:center;position:relative}.eyebrow{font-size:10px;letter-spacing:.29em;color:var(--gold);text-transform:uppercase;line-height:1.9}.crest{font-family:Georgia,serif;font-size:37px;border:1px solid var(--gold);border-radius:50%;width:73px;height:73px;display:grid;place-items:center;margin:23px auto;color:var(--gold)}h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(39px,8vw,58px);font-weight:500;line-height:1.04;margin:24px 0 7px}.sub{font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;font-style:italic;color:#c5b9a4}.rule{display:flex;align-items:center;gap:14px;margin:32px auto 27px;color:var(--gold)}.rule:before,.rule:after{content:'';height:1px;background:#62583f;flex:1}.section{font-size:10px;letter-spacing:.23em;color:var(--gold);text-transform:uppercase}.memory{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;margin:9px 0 8px}.description{color:var(--muted);font-size:13px;line-height:1.8;max-width:370px;margin:0 auto 24px}.player{background:#151a1a;border:1px solid #554a36;padding:21px 20px 18px;margin-top:20px}.play{width:65px;height:65px;border-radius:50%;border:1px solid var(--gold);background:#2b302b;color:var(--paper);font-size:23px;cursor:pointer;transition:background .2s}.play:hover{background:#434334}.play:disabled{opacity:.4;cursor:not-allowed}.wave{display:flex;justify-content:center;align-items:center;gap:4px;height:35px;margin:12px auto}.wave span{width:3px;background:#bda06e;height:var(--h);opacity:.7;border-radius:3px}.wave.active span{animation:pulse .7s ease-in-out infinite alternate;animation-delay:var(--d)}@keyframes pulse{to{height:4px;opacity:.35}}.status{font-size:11px;letter-spacing:.12em;color:#b8ac94;text-transform:uppercase}.track{width:100%;accent-color:var(--gold);margin:18px 0 4px;cursor:pointer}.times{display:flex;justify-content:space-between;font-size:11px;color:#948a78}.reveal{margin:24px 0 0;padding:21px;border:1px solid #a68c5c;background:#3a3428;animation:appear .6s ease-out}.reveal .num{font-family:'Cormorant Garamond',serif;font-size:67px;line-height:1.15;color:#e9c98e}.reveal p{font-size:12px;color:#d4c3a5;line-height:1.6;margin:7px 0 0}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.foot{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#91836e;margin-top:32px}.error{font-size:13px;color:#e8b7a9;line-height:1.7;margin-top:15px}a{color:#e4c38d}@media(max-width:480px){.inner{padding:35px 21px 28px;min-height:620px}.memory{font-size:26px}}
+</style>
+</head>
+<body>
+<main><div class="inner">
+<div class="eyebrow">The Office of Posthumous Affairs<br>Department of Unresolved Grief</div>
+<div class="crest" aria-hidden="true">VIII</div>
+<div class="eyebrow">Confidential · Venetian Archive</div>
+<h1 id="heading">A Recollection<br>Recovered</h1>
+<div class="sub" id="subtitle">A fragment of a life once shared</div>
+<div class="rule">✦</div>
+<div class="section" id="fragment">Fragment — of VIII</div>
+<div class="memory" id="memory">Awaiting identification</div>
+<p class="description" id="description">This record may be accessed only by its intended recipient.</p>
+<div class="player" id="player" hidden>
+<button class="play" id="play" aria-label="Play recollection">▶</button>
+<div class="wave" id="wave" aria-hidden="true"></div>
+<div class="status" id="status" aria-live="polite">Listen to Sebastian's recollection</div>
+<input class="track" id="track" type="range" min="0" max="100" value="0" aria-label="Recording position">
+<div class="times"><span id="elapsed">0:00</span><span id="duration">0:00</span></div>
+<audio id="audio" preload="metadata"></audio>
+<div class="error" id="error" hidden></div>
+</div>
+<div class="reveal" id="reveal" hidden><div class="section">Recovered memory reference</div><div class="num" id="number"></div><p>One piece of the whole. Preserve this number until all eight recollections have returned.</p></div>
+<div class="foot">Archive S.V. / VIII · Not to be considered in isolation</div>
+</div></main>
+<script>
+// Edit these eight records to match the envelopes and audio files.
+const recollections = {
+  1:{title:'The House on Callis Lane',description:'A recollection from the earliest years.',number:34,audio:'audio/fragment-1.mp3'},
+  2:{title:'The Terracotta Incident',description:'An unfortunate childhood disagreement.',number:12,audio:'audio/fragment-2.mp3'},
+  3:{title:'The Summer in Tuscany',description:'A holiday remembered rather differently.',number:7,audio:'audio/fragment-3.mp3'},
+  4:{title:'The Great Inheritance',description:'On matters of family and good taste.',number:19,audio:'audio/fragment-4.mp3'},
+  5:{title:'The Disastrous Dinner',description:'A celebration of questionable culinary merit.',number:6,audio:'audio/fragment-5.mp3'},
+  6:{title:'The Railway Platform',description:'An unexpected kindness, long remembered.',number:23,audio:'audio/fragment-6.mp3'},
+  7:{title:'The Hospital',description:'A difficult week, and an unspoken kindness.',number:4,audio:'audio/fragment-7.mp3'},
+  8:{title:'The Last Proper Conversation',description:'A conversation that should have lasted longer.',number:8,audio:'audio/fragment-8.mp3'}
+};
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+const id=Number(params.get('fragment'));
+const item=recollections[id];
+const fmt=n=>Number.isFinite(n)?`${Math.floor(n/60)}:${String(Math.floor(n%60)).padStart(2,'0')}`:'0:00';
+if(!item){$('heading').textContent='Record Unavailable';$('description').textContent='This archive requires a valid recollection reference. Please scan the QR code supplied in your sealed envelope.';}
+else{
+  $('fragment').textContent=`Fragment ${String(id).padStart(2,'0')} of VIII`;
+  $('memory').textContent=item.title;
+  $('description').textContent=item.description;
+  $('player').hidden=false;
+  const a=$('audio'),p=$('play'),t=$('track');a.src=item.audio;
+  const wave=$('wave');for(let i=0;i<29;i++){const s=document.createElement('span');s.style.setProperty('--h',`${7+((i*13+17)%27)}px`);s.style.setProperty('--d',`${i*-.055}s`);wave.appendChild(s)}
+  function sync(){p.textContent=a.paused?'▶':'Ⅱ';p.setAttribute('aria-label',a.paused?'Play recollection':'Pause recollection');wave.classList.toggle('active',!a.paused)}
+  p.addEventListener('click',async()=>{if(a.paused){try{await a.play()}catch(e){$('error').hidden=false;$('error').textContent='The recording could not be played. Check that the MP3 has been uploaded.'}}else a.pause();sync()});
+  a.addEventListener('play',sync);a.addEventListener('pause',sync);
+  a.addEventListener('loadedmetadata',()=>{$('duration').textContent=fmt(a.duration)});
+  a.addEventListener('timeupdate',()=>{$('elapsed').textContent=fmt(a.currentTime);if(a.duration)t.value=Math.round(a.currentTime/a.duration*100)});
+  t.addEventListener('input',()=>{if(a.duration)a.currentTime=Number(t.value)/100*a.duration});
+  a.addEventListener('ended',()=>{$('reveal').hidden=false;$('number').textContent=item.number;$('status').textContent='Recollection restored';sync()});
+  a.addEventListener('error',()=>{$('error').hidden=false;$('error').textContent='Recording not found yet. Upload '+item.audio+' to the repository and reload this page.'});
+}
+</script>
+</body></html>
